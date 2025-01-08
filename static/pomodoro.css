@@ -1,83 +1,104 @@
-/* Reset básico */
-body, html {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 0;
-    padding: 0;
+html {
+    background-color: #333232;
     height: 100%;
-    display: flex;
-    flex-direction: column; /* Alinha tudo de cima para baixo */
-    justify-content: center;
-    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
     background: linear-gradient(to bottom, #a55ed1, #ffd8ff);
 }
 
-/* Estilo do título */
-.titulo {
-    font-size: 40px;
-    color: #ffffff;
-    margin-bottom: 30px; /* Espaço entre o título e o conteúdo */
+h1 {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
 }
 
-/* Estilo do menu (inputs e botões) */
-.menu {
-    background: rgba(255, 255, 255, 0.8); /* Fundo levemente translúcido */
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
-    margin-bottom: 50px;
-}
-
-.menu label {
-    font-size: 20px;
-    color: #4b0082;
-    margin-bottom: 10px;
-    display: block; /* Garante que o label ocupe toda a linha */
-}
-
-input[type="number"] {
-    padding: 12px;
-    font-size: 18px;
-    width: 100%;
-    max-width: 300px;
-    height: 45px;
-    border: 1px solid #ccc;
+#container {
+    width: 80%;
     border-radius: 5px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
+    height: 200px;
+    background-color: #ffffff;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(50, 50, 50, 0.1);
 }
 
-button {
-    padding: 15px 30px;
-    font-size: 18px;
-    width: 100%;
-    max-width: 200px;
-    height: auto;
-    background-color: #4b0082;
+/*timers*/
+.label {
+    align-self: center;
+    justify-self: center;
+
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#inputTimer {
+    grid-area: 2 / 2 / 2 / 2;
+}
+#salvar {
+    grid-area: 2 / 6 / 2 / 6;
+}
+
+#work {
+    grid-area: 4 / 2 / 4 / 2;
+}
+#break {
+    grid-area: 4 / 6 / 4 / 6;
+}
+#cycles {
+    grid-area: 4 / 4 / 4 / 4;
+}
+
+.timer {
+    display: flex;
+    align-self: center;
+    justify-self: center;
+
+    font-size: 30px;
+    font-weight: bold;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+#counter {
+    grid-area: 5 / 4 / 5 / 4;
+}
+
+#work-timer {
+    grid-area: 5 / 2 / 5 / 2;
+}
+
+#break-timer {
+    grid-area: 5 / 6 / 5 / 6;
+}
+
+.btn {
+    margin: 10px;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
     color: #ffffff;
+    background-color: #4b0082;
     border: none;
     border-radius: 5px;
+    text-decoration: none;
     cursor: pointer;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(50, 50, 50, 0.1);
 }
 
-button:hover {
-    background-color: #ff0000;
-    transform: scale(1.05); /* Leve aumento no botão ao passar o mouse */
+#start {
+    grid-area: 6 / 2 / 6 / 2;
 }
 
-/* Estilo do timer */
-.timer {
-    font-size: 80px;
-    font-weight: bold;
-    color: #4b0082;
-    padding: 30px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 300px;
-    margin-top: 20px;
+#reset {
+    grid-area: 6 / 4 / 6 / 4;
+}
+
+#stop {
+    grid-area: 6 / 6 / 6 / 6;
 }

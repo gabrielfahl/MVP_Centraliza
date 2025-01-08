@@ -12,7 +12,15 @@ body,html {
 }
 
 .container {
-    margin-top: 50px;
+    width: 80%;
+    border-radius: 5px;
+    height: 200px;
+    background-color: #ffffff;
+    margin: 0 auto;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(50, 50, 50, 0.1);
 }
 
 h1 {

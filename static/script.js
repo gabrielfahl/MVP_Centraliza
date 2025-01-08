@@ -1,57 +1,68 @@
-let tempoTrabalho = 0;
-let tempoDescanso = 0;
-let tempoAtual = 0; // Tempo restante em segundos
-let intervalId = null;
-let isPaused = true; // Estado inicial pausado
+var salvar = document.getElementById('salvar');
+var timeInput = document.getElementById('inputTimer');
 
-function registrarValores() {
-    // Captura os valores dos inputs
-    tempoTrabalho = parseInt(document.getElementById('tempoTrabalho').value) || 0;
-    tempoDescanso = parseInt(document.getElementById('tempoDescanso').value) || 0;
+var start = document.getElementById('start');
+var stop = document.getElementById('stop');
 
-    // Converte o tempo de trabalho para segundos e define como tempo atual
-    tempoAtual = tempoTrabalho * 60;
+var wm = document.getElementById('w_minutes');
+var ws = document.getElementById('w_seconds');
 
-    // Atualiza o display do timer
-    atualizaDisplay(tempoAtual);
+var bm = document.getElementById('b_minutes');
+var bs = document.getElementById('b_seconds');
 
-    // Habilita o botão de iniciar/pausar
-    const pausePlayButton = document.getElementById("pausePlayButton");
-    pausePlayButton.textContent = "Play";
-    pausePlayButton.disabled = false;
-}
+var startTimer;
 
-function atualizaDisplay(tempo) {
-    const minutos = String(Math.floor(tempo / 60)).padStart(2, '0');
-    const segundos = String(tempo % 60).padStart(2, '0');
-    document.getElementById("displayTempo").textContent = `${minutos}:${segundos}`;
-}
+salvar.addEventListener('click', function() {
+    let timeValue = timeInput.value;
+    wm.innerText = timeValue;
+});
 
-function pausePlayTimer() {
-    const pausePlayButton = document.getElementById("pausePlayButton");
-
-    if (isPaused) {
-        // Retomar ou iniciar o timer
-        pausePlayButton.textContent = "Pause";
-        isPaused = false;
-
-        // Inicia o intervalo para contagem regressiva
-        intervalId = setInterval(() => {
-            if (tempoAtual > 0) {
-                tempoAtual--;
-                atualizaDisplay(tempoAtual);
-            } else {
-                // Quando o tempo acabar, pausa o timer
-                clearInterval(intervalId);
-                alert("Tempo finalizado!");
-                isPaused = true;
-                pausePlayButton.textContent = "Play";
-            }
-        }, 1000);
+start.addEventListener('click', function(){
+    if(startTimer === undefined){
+        startTimer = setInterval(timer, 1000)
     } else {
-        // Pausar o timer
-        pausePlayButton.textContent = "Play";
-        isPaused = true;
-        clearInterval(intervalId);
+        alert("Timer is already running");
+    }
+})
+
+
+function timer(){
+
+    if(ws.innerText != 0){
+        ws.innerText--;
+    } else if(wm.innerText != 0 && ws.innerText == 0){
+        ws.innerText = 59;
+        wm.innerText--;
+    }
+
+
+    if(wm.innerText == 0 && ws.innerText == 0){
+        if(bs.innerText != 0){
+            bs.innerText--;
+        } else if(bm.innerText != 0 && bs.innerText == 0){
+            bs.innerText = 59;
+            bm.innerText--;
+        }
+    }
+
+
+    if(wm.innerText == 0 && ws.innerText == 0 && bm.innerText == 0 && bs.innerText == 0){
+        wm.innerText = timeInput.innerText
+        ws.innerText = "00";
+
+        bm.innerText = 5;
+        bs.innerText = "00";
+
+        document.getElementById('counter').innerText++;
+
     }
 }
+
+    stop.addEventListener('click', function(){
+        stopInterval()
+        startTimer = undefined;
+    })
+
+    function stopInterval(){
+        clearInterval(startTimer);
+    }

@@ -1,38 +1,34 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="static/Pomodoro.css">
     <title>Pomodoro Timer</title>
-    <link rel="stylesheet" href="/static/pomodoro.css">
 </head>
-
 <body>
-    <header class="titulo">
-        <h1>Timer Centraliza</h1>
-    </header>
+    <h1>Pomodoro Centraliza</h1>
+    <div id="container">
+        <input type="number" id="inputTimer" min="0" placeholder="Minutos de trabalho">
+        <button id="salvar" >salvar</button>
 
-    <main>
-        <div class="menu">
-            <label for="tempoTrabalho">Digite o tempo de ação:</label>
-            <input type="number" id="tempoTrabalho" min="1" placeholder="Minutos" required>
-            <button id="startButton"onclick="registrarValores()">Salvar</button> <!-- divir entre botao de salvar data e de iniciar -->
-            <br>
-            <label for="tempoDescanso">Digite o tempo de descanso:</label>
-            <input type="number" id="tempoDescanso" min="1" placeholder="Minutos" required>
-            <br>
-            <button id="pausePlayButton" onclick="pausePlayTimer()">Play</button>
-        </div>
+        <p id="work" class="label">Trabalho</p><p id="break" class="label">Descanso</p><p id="cycles" class="label">Ciclos:</p>
 
-        <div class="timer">
-            <h1 id = "displayTempo">00:00</h1>
+        <div id="work-timer" class="timer">
+            <p id="w_minutes">00</p><p class="semicolon">:</p><p id="w_seconds">00</p>
         </div>
 
 
-    </main>
+        <p id="counter" class="timer">0</p>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
 
+        <div id="break-timer" class="timer">
+            <p id="b_minutes">05</p><p class="semicolon">:</p><p id="b_seconds">00</p>
+        </div>
+        <button id="start" class="btn">Start</button>
+        <button id="stop" class="btn">Pause</button>
+    </div>
+    <script src="static/script.js"></script>
 </body>
 </html>
