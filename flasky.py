@@ -34,10 +34,10 @@ class Subtarefa(db.Model):
 def index():
     return render_template('inicio.html')
 
-@app.route('/visualizar_tarefas', methods=['GET'])
-def visualizar_tarefas():
+@app.route('/visualizar_tarefa', methods=['GET'])
+def visualizar_tarefa():
     tarefas = Tarefa.query.all()
-    return render_template('visualizar_tarefas.html', tarefas=tarefas)
+    return render_template('visualizar_tarefa.html', tarefas=tarefas)
 
 @app.route('/adicionar_tarefa', methods=['GET', 'POST'])
 def adicionar_tarefa():
@@ -56,7 +56,7 @@ def adicionar_tarefa():
                 # Captura o erro de integridade (nome duplicado)
                 db.session.rollback()  # Reverte qualquer alteração no banco
                 flash('Erro: Nome da tarefa já existe!', 'error')
-            return redirect(url_for('visualizar_tarefas'))
+            return redirect(url_for('visualizar_tarefa'))
         else:
             flash('Por favor, preencha todos os campos.', 'error')
     return render_template('adicionar_tarefa.html')

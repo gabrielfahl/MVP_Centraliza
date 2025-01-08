@@ -1,0 +1,83 @@
+/* Reset básico */
+body, html {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column; /* Alinha tudo de cima para baixo */
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #a55ed1, #ffd8ff);
+}
+
+/* Estilo do título */
+.titulo {
+    font-size: 40px;
+    color: #ffffff;
+    margin-bottom: 30px; /* Espaço entre o título e o conteúdo */
+    text-align: center;
+}
+
+/* Estilo do menu (inputs e botões) */
+.menu {
+    background: rgba(255, 255, 255, 0.8); /* Fundo levemente translúcido */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    margin-bottom: 50px;
+}
+
+.menu label {
+    font-size: 20px;
+    color: #4b0082;
+    margin-bottom: 10px;
+    display: block; /* Garante que o label ocupe toda a linha */
+}
+
+input[type="number"] {
+    padding: 12px;
+    font-size: 18px;
+    width: 100%;
+    max-width: 300px;
+    height: 45px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    background-color: #4b0082;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #ff0000;
+    transform: scale(1.05); /* Leve aumento no botão ao passar o mouse */
+}
+
+/* Estilo do timer */
+.timer {
+    font-size: 80px;
+    font-weight: bold;
+    color: #4b0082;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    margin-top: 20px;
+}

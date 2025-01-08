@@ -1,0 +1,106 @@
+body,html {
+    font-family: Arial, sans-serif;
+    height: 100%;
+    background-color: #f8f8ff;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #a55ed1, #ffd8ff);
+    background-size: cover;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(50, 50, 50, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #2f4f4f;
+}
+
+.tarefa {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #c0c0c0;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+}
+
+.tarefa h3 {
+    margin: 0;
+    color: #2f4f4f;
+}
+
+.tarefa p {
+    margin: 5px 0;
+    color: #696969;
+}
+
+.subtarefas {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.subtarefas li {
+    color: #4b0082;
+}
+
+.button-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #4b0082;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.buttonTimer {
+    margin: auto;
+    display: inline-block;
+    width: 200px; /* Largura do botão */
+    height: 150px; /* Altura do botão */
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #4b0082;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    line-height: 100px; /* Alinha o texto verticalmente */
+}
+
+.button:hover {
+    background-color: #6a0dad;
+}
+
+.alert {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.alert.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}

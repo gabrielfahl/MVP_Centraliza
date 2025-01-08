@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Tarefas</title>
+    <link rel="stylesheet" href="/static/visualizar_tarefa.css">
+</head>
+<body>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert {{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <h1>Lista de Tarefas</h1>
+        <div class="button-container">
+            <a href="/adicionar_tarefa" class="button">Adicionar Tarefas</a>
+        </div>
+
+        {% for tarefa in tarefas %}
+        <div class="tarefa">
+            <h3>{{ tarefa.nome }}</h3>
+            <p>{{ tarefa.descricao }}</p>
+            <ul class="subtarefas">
+                {% for subtarefa in tarefa.subtarefas %}
+                <li>{{ subtarefa.sub_nome }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        {% endfor %}
+    </div>
+    <a href="/pomodoro" class="buttonTimer">Timer Centraliza</a>
+</body>
+</html>
