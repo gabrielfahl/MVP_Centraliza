@@ -18,24 +18,28 @@
         {% endif %}
         {% endwith %}
 
-        <h1>Lista de Tarefas</h1>
-        <div class="button-container">
-            <a href="/adicionar_tarefa" class="button">Adicionar Tarefas</a>
-        </div>
+        <div class="container-tarefas">
+            <h1>Lista de Tarefas</h1>
+            <div class="button-container">
+                <a href="/adicionar_tarefa" class="button">Adicionar Tarefas</a>
+            </div>
 
-        {% for tarefa in tarefas %}
-        <div class="tarefa">
-            <h3>{{ tarefa.nome }}</h3>
-            <p>{{ tarefa.descricao }}</p>
-            <ul class="subtarefas">
-                {% for subtarefa in tarefa.subtarefas %}
-                <li>{{ subtarefa.sub_nome }}</li>
-                {% endfor %}
-            </ul>
+            {% for tarefa in tarefas %}
+            <div class="tarefa">
+                <h3>{{ tarefa.nome }}</h3>
+                <p>{{ tarefa.descricao }}</p>
+                <ul class="subtarefas">
+                    {% for subtarefa in tarefa.subtarefas %}
+                    <li>{{ subtarefa.sub_nome }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
         </div>
-
-        {% endfor %}
+            <div class="container-botao-timer">
+            <a href="/pomodoro" class="buttonTimer">Timer Centraliza</a>
+            <a href="/pomodoro" class="buttonTimer">Kanban</a>
+        </div>
     </div>
-    <a href="/pomodoro" class="buttonTimer">Timer Centraliza</a>
 </body>
 </html>
