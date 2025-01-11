@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
+from datetime import datetime
 
 
 # Configuração do Flask e do SQLAlchemy
@@ -46,21 +47,33 @@ def adicionar_tarefa():
     if request.method == 'POST':
         nome = request.form['nome']
         descricao = request.form['descricao']
-        # Verifica se os campos estão preenchidos
-        if nome and descricao:
+        data_inicio = request.form['data_inicio']
+        data_fim = request.form['data_fim']
+        
+        # Verifica se todos os campos estão preenchidos
+        if nome and descricao and data_inicio and data_fim:
             try:
-                # Tenta criar uma nova tarefa
-                nova_tarefa = Tarefa(nome=nome, descricao=descricao)
+                # Converte as strings de data para objetos datetime
+                data_inicio = datetime.strptime(data_inicio, '%Y-%m-%d').date()
+                data_fim = datetime.strptime(data_fim, '%Y-%m-%d').date()
+                
+                # Cria a nova tarefa
+                nova_tarefa = Tarefa(
+                    nome=nome,
+                    descricao=descricao,
+                    data_inicio=data_inicio,
+                    data_fim=data_fim
+                )
                 db.session.add(nova_tarefa)
                 db.session.commit()
                 flash('Tarefa adicionada com sucesso!', 'success')
-            except IntegrityError:
-                # Captura o erro de integridade (nome duplicado)
-                db.session.rollback()  # Reverte qualquer alteração no banco
-                flash('Erro: Nome da tarefa já existe!', 'error')
-            return redirect(url_for('visualizar_tarefa'))
+                return redirect(url_for('visualizar_tarefa'))
+            except Exception as e:
+                db.session.rollback()  # Caso haja algum erro
+                flash(f'Erro ao adicionar tarefa: {str(e)}', 'error')
         else:
             flash('Por favor, preencha todos os campos.', 'error')
+
     return render_template('adicionar_tarefa.html')
 
 @app.route("/pomodoro")
