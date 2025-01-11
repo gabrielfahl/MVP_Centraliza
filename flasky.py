@@ -57,20 +57,23 @@ def adicionar_tarefa():
                 data_inicio = datetime.strptime(data_inicio, '%Y-%m-%d').date()
                 data_fim = datetime.strptime(data_fim, '%Y-%m-%d').date()
                 
+                if data_fim < data_inicio:
+                    flash('Erro: A data de término não pode ser anterior à data de início!', 'error')
+                else:
                 # Cria a nova tarefa
-                nova_tarefa = Tarefa(
-                    nome=nome,
-                    descricao=descricao,
-                    data_inicio=data_inicio,
-                    data_fim=data_fim
-                )
-                db.session.add(nova_tarefa)
-                db.session.commit()
-                flash('Tarefa adicionada com sucesso!', 'success')
-                return redirect(url_for('visualizar_tarefa'))
+                    nova_tarefa = Tarefa(
+                        nome=nome,
+                        descricao=descricao,
+                        data_inicio=data_inicio,
+                        data_fim=data_fim
+                    )
+                    db.session.add(nova_tarefa)
+                    db.session.commit()
+                    flash('Tarefa adicionada com sucesso!', 'success')
+                    return redirect(url_for('visualizar_tarefa'))
             except Exception as e:
-                db.session.rollback()  # Caso haja algum erro
-                flash(f'Erro ao adicionar tarefa: {str(e)}', 'error')
+                    db.session.rollback()  # Caso haja algum erro
+                    flash(f'Erro ao adicionar tarefa: {str(e)}', 'error')
         else:
             flash('Por favor, preencha todos os campos.', 'error')
 
