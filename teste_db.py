@@ -1,23 +1,20 @@
-from centraliza import db, Tarefa, Subtarefa, app
-
+from flasky import db, Tarefa, Subtarefa, app
+from datetime import datetime  # Importando o datetime para converter as strings
 
 with app.app_context():
-    db.create_all()
+    # Convertendo as strings para o tipo de data
+    data_inicio = datetime.strptime("2025-01-10", "%Y-%m-%d").date()
+    data_fim = datetime.strptime("2025-01-10", "%Y-%m-%d").date()
 
-    # Inserir dados
-    tarefa1 = Tarefa(nome="Limpar a casa", descricao="Organizar e limpar toda a casa")
-    subtarefa1_1 = Subtarefa(sub_nome="Lavar a louça", tarefa=tarefa1)
-    subtarefa1_2 = Subtarefa(sub_nome="Varrer o chão", tarefa=tarefa1)
-
-    tarefa2 = Tarefa(
-        nome="Se preparar para a semana",
-        descricao="As coisas que devo fazer para me preparar para a semana"
+    # Criando uma nova tarefa
+    nova_tarefa = Tarefa(
+        nome="Estudar Flask com SQLAlchemy",
+        descricao="Testar integração com calendário",
+        data_inicio=data_inicio,
+        data_fim=data_fim
     )
-    subtarefa2_1 = Subtarefa(sub_nome="Ajustar Alarmes", tarefa=tarefa2)
-    subtarefa2_2 = Subtarefa(sub_nome="Comprar Comida", tarefa=tarefa2)
-
-    db.session.add_all([tarefa1, subtarefa1_1, subtarefa1_2, tarefa2, subtarefa2_1, subtarefa2_2])
+    
+    # Adicionando a tarefa ao banco de dados e confirmando a transação
+    db.session.add(nova_tarefa)
     db.session.commit()
-
     print("Banco de dados populado com sucesso!")
-#Execute esse arquivo pra criar os exemplos dentro do banco de dados pra conseguir visualizar ele

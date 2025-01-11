@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 
@@ -19,6 +19,8 @@ class Tarefa(db.Model):
     __tablename__ = 'tarefas'
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(64), unique=True)
+    data_inicio = db.Column(db.Date, nullable=False)
+    data_fim = db.Column(db.Date, nullable=False)
     descricao = db.Column(db.String(500))
     subtarefas = db.relationship('Subtarefa', backref='tarefa')
 
@@ -61,10 +63,28 @@ def adicionar_tarefa():
             flash('Por favor, preencha todos os campos.', 'error')
     return render_template('adicionar_tarefa.html')
 
-
 @app.route("/pomodoro")
 def home():
     return render_template("pomodoro.html")
+
+@app.route('/calendario')
+def calendario():
+    return render_template('calendario.html')
+
+@app.route('/tarefas')
+def get_tarefas():
+    tarefas = Tarefa.query.all()  # Busca todas as tarefas
+    resultado = [
+        {
+            "id": tarefa.id,
+            "title": tarefa.nome,
+            "start": tarefa.data_inicio.isoformat(),  # Formato ISO para o FullCalendar
+            "end": tarefa.data_fim.isoformat(),
+            "description": tarefa.descricao
+        }
+        for tarefa in tarefas
+    ]
+    return jsonify(resultado)
 
 # Inicialização do Banco de Dados e Execução do Servidor
 if __name__ == '__main__':
