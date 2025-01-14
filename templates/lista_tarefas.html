@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualizar Tarefas</title>
-    <link rel="stylesheet" href="/static/visualizar_tarefa.css">
+    <link rel="stylesheet" href="/static/lista_tarefas.css">
 </head>
 <body>
     <div class="container">
@@ -25,8 +25,10 @@
             </div>
 
             {% for tarefa in tarefas %}
-            <div class="tarefa">
-                <h3>{{ tarefa.nome }}</h3>
+            <div class="tarefa" id="{{ tarefa.id }}"> 
+                <a href="/tarefa/{{ tarefa.id }}">
+                    <h3>{{ tarefa.nome }}</h3>
+                </a>
                 <p>{{ tarefa.descricao }}</p>
                 <ul class="subtarefas">
                     {% for subtarefa in tarefa.subtarefas %}

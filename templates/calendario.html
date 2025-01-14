@@ -19,6 +19,9 @@
                     },
                     eventDidMount: function (info) {
                         info.el.setAttribute('data-title', `${info.event.title}\n${info.event.extendedProps.description}`);
+                        info.el.addEventListener('click', function() {
+                            window.location.href = `/tarefa/${info.event.id}`;
+                        });
                     }
             })
             calendar.render()

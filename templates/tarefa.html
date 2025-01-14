@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Tarefas</title>
+    <link rel="stylesheet" href="/static/lista_tarefas.css">
+</head>
+<body>
+  <div class="container">
+    <div class="tarefa">
+        <h3>{{ tarefa.nome }}</h3>
+        <p>{{ tarefa.descricao }}</p>
+        <p>{{ tarefa.data_inicio }}</p>
+        <p>{{ tarefa.data_fim }}</p>
+        <ul class="subtarefas">
+              {% for subtarefa in tarefa.subtarefas %}
+              <li>{{ subtarefa.sub_nome }}</li>
+              {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
