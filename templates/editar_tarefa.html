@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Tarefa</title>
+    <link rel="stylesheet" href="/static/adicionar_tarefa.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Adicionar Nova Tarefa</h1>
+        <form method="POST" action="/editar_tarefa/{{ tarefa.id }}">
+            <label for="nome">Nome da Tarefa</label>
+            <input type="text" id="nome" name="nome" value="{{ tarefa.nome }}" maxlength="64" required>
+
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" name="descricao" maxlength="500" required>{{ tarefa.descricao }}</textarea>
+
+            <label for="data_inicio">Data de Início</label>
+            <input type="date" id="data_inicio" name="data_inicio" value="{{ tarefa.data_inicio }}" required>
+
+            <label for="data_fim">Data de Fim</label>
+            <input type="date" id="data_fim" name="data_fim" value="{{ tarefa.data_fim }}" required>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -108,73 +108,19 @@ def editar_tarefa(id):
 def excluir_tarefa(id):
     tarefa = Tarefa.query.get_or_404(id)
     try:
+        # Excluir subtarefas associadas primeiro
+        Subtarefa.query.filter_by(tarefa_id=tarefa.id).delete()
         db.session.delete(tarefa)
         db.session.commit()
         flash('Tarefa excluída com sucesso!', 'success')
-    except Exception as e:
+    except IntegrityError as e:
         db.session.rollback()
-        flash(f'Erro ao excluir tarefa: {str(e)}', 'error')
+        flash(f'Erro de integridade ao excluir tarefa: {str(e)}', 'error')
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        flash(f'Erro no banco de dados ao excluir tarefa: {str(e)}', 'error')
 
     return redirect(url_for('visualizar_tarefa'))
-
-@app.route('/adicionar_subtarefa', methods=['GET', 'POST'])
-def adicionar_subtarefa():
-    tarefas = Tarefa.query.all()
-    if request.method == 'POST':
-        tarefa_id = request.form['tarefa_id']
-        nome = request.form['nome']
-        if tarefa_id and nome:
-            try:
-                nova_subtarefa = Subtarefa(
-                    tarefa_id=tarefa_id,
-                    sub_nome=nome
-                )
-                db.session.add(nova_subtarefa)
-                db.session.commit()
-                flash('Subtarefa adicionada com sucesso!', 'success')
-                return redirect(url_for('visualizar_tarefa'))
-            except Exception as e:
-                db.session.rollback()
-                flash(f'Erro ao adicionar subtarefa: {str(e)}', 'error')
-        else:
-            flash('Por favor, preencha todos os campos.', 'error')
-
-    return render_template('adicionar_subtarefa.html', tarefas=tarefas)
-
-@app.route('/excluir_subtarefa/<int:id>', methods=['POST'])
-def excluir_subtarefa(id):
-    subtarefa = Subtarefa.query.get_or_404(id)
-    try:
-        db.session.delete(subtarefa)
-        db.session.commit()
-        flash('Subtarefa excluída com sucesso!', 'success')
-    except Exception as e:
-        db.session.rollback()
-        flash(f'Erro ao excluir subtarefa: {str(e)}', 'error')
-
-    return redirect(url_for('visualizar_tarefa'))
-
-@app.route('/editar_subtarefa/<int:id>', methods=['GET', 'POST'])
-def editar_subtarefa(id):
-    subtarefa = Subtarefa.query.get_or_404(id)
-    tarefas = Tarefa.query.all()
-    if request.method == 'POST':
-        subtarefa.sub_nome = request.form['nome']
-        subtarefa.tarefa_id = request.form['tarefa_id']
-        try:
-            db.session.commit()
-            flash('Subtarefa atualizada com sucesso!', 'success')
-            return redirect(url_for('visualizar_tarefa'))
-        except Exception as e:
-            db.session.rollback()
-            flash(f'Erro ao atualizar subtarefa: {str(e)}', 'error')
-
-    return render_template('editar_subtarefa.html', subtarefa=subtarefa, tarefas=tarefas)
-
-@app.route('/visualizar_subtarefa', methods=['GET'])
-def visualizar_subtarefa():
-    subtarefas = Subtarefa.query.all()
-    return render_template('visualizar_subtarefa.html', subtarefas=subtarefas)
 
 @app.route('/tarefa/<int:id>', methods=['GET'])
 def visualizar_tarefa_id(id):

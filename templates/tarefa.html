@@ -7,17 +7,84 @@
     <link rel="stylesheet" href="/static/lista_tarefas.css">
 </head>
 <body>
-  <div class="container">
-    <div class="tarefa">
-        <h3>{{ tarefa.nome }}</h3>
-        <p>{{ tarefa.descricao }}</p>
-        <p>{{ tarefa.data_inicio }}</p>
-        <p>{{ tarefa.data_fim }}</p>
-        <ul class="subtarefas">
-              {% for subtarefa in tarefa.subtarefas %}
-              <li>{{ subtarefa.sub_nome }}</li>
-              {% endfor %}
-        </ul>
+    <div class="container">
+        <div class="tarefa">
+            <h3>{{ tarefa.nome }}</h3>
+            <p>{{ tarefa.descricao }}</p>
+            <p>{{ tarefa.data_inicio }}</p>
+            <p>{{ tarefa.data_fim }}</p>
+            <ul class="subtarefas">
+                {% for subtarefa in tarefa.subtarefas %}
+                <li>{{ subtarefa.sub_nome }}</li>
+                {% endfor %}
+            </ul>
+            <div style="text-align: center;">
+                <a href="/editar_tarefa/{{ tarefa.id }}" class="btn-editar" style="display: inline-block; padding: 10px 20px; background-color: #4b0082; color: white; text-decoration: none; border-radius: 5px;">Editar Tarefa</a>
+            </div>
+            <div style="text-align: center; margin-top: 10px;">
+                <!-- Botão para abrir o modal -->
+                <a href="javascript:void(0);" id="openModalButton" 
+                    class="btn-excluir" 
+                    style="display: inline-block; padding: 10px 20px; 
+                    background-color: red; color: white; text-decoration: none; 
+                    border-radius: 5px; cursor: pointer;">
+                    Excluir Tarefa
+                </a>
+            </div>
+            
+            <!-- Modal de confirmação -->
+            <div id="confirmModal" class="modal" 
+                style="display: none; position: fixed; top: 0; left: 0; width: 100%; 
+                height: 100%; background-color: rgba(0, 0, 0, 0.5); justify-content: center; 
+                align-items: center;">
+                <div class="modal-content" 
+                    style="background-color: white; padding: 20px; border-radius: 5px; 
+                    text-align: center; max-width: 400px; margin: auto;">
+                    <h4 style="margin-bottom: 20px;">Tem certeza que deseja excluir esta tarefa?</h4>
+                    <div style="display: flex; justify-content: center; gap: 10px;">
+                        <!-- Botão de cancelar -->
+                        <a href="javascript:void(0);" id="cancelButton" 
+                            style="display: inline-block; padding: 10px 20px; background-color: gray; 
+                            color: white; text-decoration: none; border-radius: 5px; cursor: pointer;">
+                            Cancelar
+                        </a>
+                        <!-- Botão de confirmação -->
+                        <form action="/excluir_tarefa/{{ tarefa.id }}" method="POST" style="display: inline;">
+                            <button type="submit" 
+                                style="display: inline-block; padding: 10px 20px; background-color: red; 
+                                color: white; text-decoration: none; border: none; 
+                                border-radius: 5px; cursor: pointer;">
+                                Excluir
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- Script para controlar o modal -->
+    <script>
+        // Seleciona os elementos
+        const openModalButton = document.getElementById('openModalButton');
+        const confirmModal = document.getElementById('confirmModal');
+        const cancelButton = document.getElementById('cancelButton');
+
+        // Mostra o modal ao clicar no botão "Excluir Tarefa"
+        openModalButton.addEventListener('click', () => {
+            confirmModal.style.display = 'flex';
+        });
+
+        // Fecha o modal ao clicar no botão "Cancelar"
+        cancelButton.addEventListener('click', () => {
+            confirmModal.style.display = 'none';
+        });
+
+        // Fecha o modal ao clicar fora da área do modal
+        window.addEventListener('click', (event) => {
+            if (event.target === confirmModal) {
+                confirmModal.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
