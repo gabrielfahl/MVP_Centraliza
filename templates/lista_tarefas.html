@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/static/lista_tarefas.css">
 </head>
 <body>
+    {% include 'base.html' %}
     <div class="container">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}

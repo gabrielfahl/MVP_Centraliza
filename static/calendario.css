@@ -1,34 +1,52 @@
+header {
+    /* Estilos específicos para o cabeçalho */
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    color: #4b0082;
+    border-bottom: 2px solid #ddd;
+    width: 100%;
+}
+
+/* Ajuste de estilo diretamente no HTML */
 body, html {
     font-family: Arial, sans-serif;
     height: 100%;
     padding: 0;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: linear-gradient(to bottom, #a55ed1, #ffd8ff);
     background-size: cover;
-    overflow: hidden;
-}
-
-#calendar {
-    width: 80vmin;
-    height: 80vmin;
-    max-width: 600px;
-    max-height: 600px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(50, 50, 50, 0.1);
-    padding: 10px;
     display: flex;
-    flex-direction: column;
-
+    flex-direction: column; /* Organiza os itens em coluna */
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
     text-align: center;
     color: #2f4f4f;
     margin-bottom: 20px;
+}
+
+#calendar {
+    width: 90vw;
+    height: 90vh;
+    max-width: 1200px;
+    max-height: 800px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(50, 50, 50, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+/* Ajustes de estilo do calendário */
+.fc-scrollgrid {
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(50, 50, 50, 0.1);
 }
 
 .fc {
@@ -40,6 +58,7 @@ h1 {
     background-color: #ffffff;
     padding: 10px;
 }
+
 .fc-toolbar {
     display: flex;
     justify-content: space-between;
@@ -117,11 +136,9 @@ h1 {
     background-color: #ffffff;
     border: 1px solid #ddd;
     border-radius: 5px;
-    -webkit-transition: background-color 0.2s ease-in-out;
-    -moz-transition: background-color 0.2s ease-in-out;
-    -o-transition: background-color 0.2s ease-in-out;
     transition: background-color 0.2s ease-in-out;
 }
+
 .fc-day:hover {
     background-color: #f5f5f5;
 }

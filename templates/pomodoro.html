@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="static/pomodoro.css">
-    <title>Pomodoro Timer</title>
+    <title>Timer</title>
 </head>
 <body>
-    <h1>Pomodoro Centraliza</h1>
+
+    {% include 'base.html' %}
+
+    <h1>Timer</h1>
     <div id="container">
         <input type="number" id="inputTimer" min="0" placeholder="Minutos de trabalho">
         <button id="salvar" >salvar</button>
