@@ -1,8 +1,10 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 
 # Configuração do Flask e do SQLAlchemy
@@ -31,11 +33,20 @@ class Subtarefa(db.Model):
     sub_nome = db.Column(db.String(64), unique=True)
     tarefa_id = db.Column(db.Integer, db.ForeignKey('tarefas.id'))
 
+#Criação de usuário
+class Usuario(db.Model):
+    __tablename__ = 'usuarios'
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(64), unique=True, nullable=False)
+    senha = db.Column(db.String(128), nullable=False)
+
 
 # Aqui começa a definição de rotas
 @app.route('/')
 def index():
-    return render_template('inicio.html')
+    usuario = session.get('usuario')
+    return render_template('index.html', usuario=usuario)
+
 
 @app.route('/visualizar_tarefa', methods=['GET'])
 def visualizar_tarefa():
@@ -101,6 +112,50 @@ def get_tarefas():
         for tarefa in tarefas
     ]
     return jsonify(resultado)
+
+#Rota para criação de conta, login e logout
+@app.route('/criar_conta', methods=['GET', 'POST'])
+def criar_conta():
+    if request.method == 'POST':
+        nome = request.form['nome']
+        senha = request.form['senha']
+        if nome and senha:
+            senha_hash = generate_password_hash(senha)
+            novo_usuario = Usuario(nome=nome, senha=senha_hash)
+            try:
+                db.session.add(novo_usuario)
+                db.session.commit()
+                flash('Conta criada com sucesso!', 'success')
+                return redirect(url_for('login'))
+            except:
+                db.session.rollback()
+                flash('Erro: Nome de usuário já está em uso.', 'error')
+        else:
+            flash('Por favor, preencha todos os campos.', 'error')
+    return render_template('criar_conta.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        nome = request.form['nome']
+        senha = request.form['senha']
+        usuario = Usuario.query.filter_by(nome=nome).first()
+        if usuario and check_password_hash(usuario.senha, senha):
+            session['usuario'] = usuario.nome
+            flash('Login realizado com sucesso!', 'success')
+            return redirect(url_for('index'))
+        else:
+            flash('Nome de usuário ou senha incorretos.', 'error')
+            return redirect(url_for('login'))
+    return render_template('login.html')
+
+
+@app.route('/logout')
+def logout():
+    session.pop('usuario', None)
+    flash('Você saiu com sucesso.', 'success')
+    return redirect(url_for('index'))
 
 # Inicialização do Banco de Dados e Execução do Servidor
 if __name__ == '__main__':

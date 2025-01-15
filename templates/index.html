@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <link rel="stylesheet" href="/static/inicio.css">
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-container">
+            {% for category, message in messages %}
+            <div class="alert {{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+
+    <div class="container">
+        {% if usuario %}
+            <h1>Bem-vindo, {{ usuario }}!</h1>
+            <a href="/visualizar_tarefa" class="button">Visualizar Tarefas</a>
+            <a href="/logout" class="button">Sair</a>
+        {% else %}
+            <h1>Bem-vindo à Centraliza!</h1>
+            <a href="/login" class="button">Login</a>
+            <a href="/criar_conta" class="button">Criar Conta</a>
+        {% endif %}
+    </div>
+</body>
+</html>
