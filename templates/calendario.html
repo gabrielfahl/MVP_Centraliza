@@ -2,8 +2,6 @@
 <html lang="pt-br">
 <head>
     {% include 'base.html' %}
-</head>
-<body>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário</title>
@@ -31,6 +29,10 @@
             calendar.render();
         });
     </script>
-    <div id="calendar"></div>
+</head>
+<body>
+    <div class="content">
+        <div id="calendar"></div>
+    </div>
 </body>
 </html>

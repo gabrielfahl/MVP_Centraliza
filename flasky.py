@@ -146,6 +146,10 @@ def get_tarefas():
     ]
     return jsonify(resultado)
 
+@app.route('/kanban')
+def kanban():
+    return render_template('kanban.html')
+
 # Inicialização do Banco de Dados e Execução do Servidor
 if __name__ == '__main__':
     with app.app_context():

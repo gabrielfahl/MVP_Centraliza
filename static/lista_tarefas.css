@@ -9,9 +9,11 @@ body,html {
 }
 
 .container {
+    height: calc(100vh - 40px); /* Altura da tela menos a margem */
+    overflow: hidden;
     display: flex;
     width: 80%;
-    height: 90%;
+    height: 80%;
     margin: 20px auto;
     padding: 10px;
     background-color: #ffffff;
@@ -21,8 +23,12 @@ body,html {
     justify-content: center;
 }
 
+
 .container-tarefas{
-    width: 80%;
+    overflow-y: auto; /* Adiciona rolagem vertical */
+    width: 95%;
+    height: 100%;
+    padding-right: 10px;
 }
 
 .container-botao-timer{
@@ -86,11 +92,16 @@ h1 {
 }
 
 .button-container {
+    position: sticky; /* Fixa o botão no topo abaixo do título */
+    top: 50px; /* Ajuste para garantir que o botão não fique em cima do título */
+    background-color: #fff;
     text-align: center;
-    margin: 20px 0;
+    padding: 10px;
+    z-index: 9; /* Um nível abaixo do título */
 }
 
 .button {
+    position: sticky; /* Fixa o botão no topo abaixo do título */
     display: inline-block;
     padding: 10px 20px;
     font-size: 16px;
@@ -112,6 +123,12 @@ h1 {
     margin-bottom: 20px;
     border-radius: 5px;
     text-align: center;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container .alert {
+    margin-top: 10px;
 }
 
 .alert.success {
@@ -124,4 +141,14 @@ h1 {
     background-color: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
+}
+
+.titulo {
+    position: sticky; /* Fixa o título no topo */
+    top: 0;
+    background-color: #fff;
+    padding: 7px 0;
+    text-align: center;
+    color: #2f4f4f;
+    z-index: 10; /* Garante que o título ficará acima das tarefas */
 }

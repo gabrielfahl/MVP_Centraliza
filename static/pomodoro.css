@@ -37,6 +37,13 @@ h1 {
     grid-area: 2 / 2 / 2 / 2;
 }
 #salvar {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #4b0082;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     grid-area: 2 / 6 / 2 / 6;
 }
 
@@ -44,11 +51,12 @@ h1 {
     grid-area: 4 / 2 / 4 / 2;
 }
 #break {
-    grid-area: 4 / 6 / 4 / 6;
-}
-#cycles {
     grid-area: 4 / 4 / 4 / 4;
 }
+#cycles {
+    grid-area: 4 / 6 / 4 / 6;
+}
+
 
 .timer {
     display: flex;
@@ -65,7 +73,7 @@ p {
 }
 
 #counter {
-    grid-area: 5 / 4 / 5 / 4;
+    grid-area: 5 / 6 / 5 / 6;
 }
 
 #work-timer {
@@ -73,7 +81,7 @@ p {
 }
 
 #break-timer {
-    grid-area: 5 / 6 / 5 / 6;
+    grid-area: 5 / 4 / 5 / 4;
 }
 
 .btn {
@@ -92,15 +100,25 @@ p {
 }
 
 #start {
-    grid-area: 6 / 2 / 6 / 2;
-}
-
-#reset {
-    grid-area: 6 / 4 / 6 / 4;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #048200;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    grid-area: 6 / 3 / 6 / 3;
 }
 
 #stop {
-    grid-area: 6 / 6 / 6 / 6;
+    grid-area: 6 / 5 / 6 / 5;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #ff0000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 /* Estilo do cabeçalho */

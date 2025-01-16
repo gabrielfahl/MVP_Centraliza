@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Tarefas</title>
+    <link rel="stylesheet" href="/static/kanban.css">
+</head>
+<body>
+    {% include 'base.html' %}
+
+    <h1 id="titulo">Kanban</h1>
+
+    <div class="container">
+        <!-- Coluna 1: Não Iniciado -->
+        <div class="kanban-column">
+            <h2>Não Iniciado</h2>
+            <div class="kanban-task">
+                <p>Tarefa 1</p>
+            </div>
+            <div class="kanban-task">
+                <p>Tarefa 2</p>
+            </div>
+        </div>
+        <!-- Coluna 2: Em Progresso -->
+        <div class="kanban-column">
+            <h2>Em Progresso</h2>
+            <div class="kanban-task">
+                <p>Tarefa 3</p>
+            </div>
+            <div class="kanban-task">
+                <p>Tarefa 4</p>
+            </div>
+        </div>
+        <!-- Coluna 3: Concluído -->
+        <div class="kanban-column">
+            <h2>Concluído</h2>
+            <div class="kanban-task">
+                <p>Tarefa 5</p>
+            </div>
+            <div class="kanban-task">
+                <p>Tarefa 6</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
